@@ -1,0 +1,21 @@
+package com.npci.UPISim.dto;
+
+
+
+
+import jakarta.xml.bind.annotation.*;
+
+@XmlAccessorType(XmlAccessType.FIELD)
+public class Amount {
+    @XmlAttribute private String curr;
+    @XmlAttribute private double value;
+
+    // getters and setters
+    public String getCurr() { return curr; }
+    public void setCurr(String curr) { this.curr = curr; }
+
+    public double getValue() { return value; }
+    public void setValue(double value) { this.value = value; }
+
+
+}

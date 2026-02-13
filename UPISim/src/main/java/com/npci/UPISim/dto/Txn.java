@@ -121,11 +121,10 @@ public class Txn {
         this.type = type;
     }
 
-    // --- New getter and setter for delegate ---
-    public String getDelegate() {
+    public String getDelegate() { // New getter
         return delegate;
     }
-    public void setDelegate(String delegate) {
+    public void setDelegate(String delegate) { // New setter
         this.delegate = delegate;
     }
 

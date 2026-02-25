@@ -47,4 +47,3 @@ public final class ReqPayValidator {
 
         return null; // ✅ VALID
     }
-}

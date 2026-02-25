@@ -17,5 +17,5 @@ public final class ValidationRules {
             Set.of("00", "01", "02");
 
     public static final Set<String> REQPAY_TXN_DELEGATE_ALLOWED_VALUES =
-            Set.of("Y", "N");
+            Set.of("y", "n");
 }

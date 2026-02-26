@@ -11,8 +11,11 @@ public final class ValidationRules {
             Set.of("PAY", "COLLECT");
 
     public static final Set<String> ALLOWED_PURPOSE_CODES =
-            Set.of("00", "01", "02", "11");
+            Set.of("00", "01", "02", "11","20");
 
     public static final Set<String> ALLOWED_INITIATION_MODES =
             Set.of("00", "01", "02");
+
+    public static final Set<String> REQPAY_TXN_DELEGATE_ALLOWED_VALUES =
+            Set.of("Y", "N");
 }

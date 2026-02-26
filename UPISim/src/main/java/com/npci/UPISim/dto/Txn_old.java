@@ -28,8 +28,7 @@ public class Txn {
     private String ts;
     @XmlAttribute
     private String type;
-    @XmlAttribute
-    private String delegate;
+
 
     public Txn() {
     }
@@ -49,12 +48,14 @@ public class Txn {
         this.custRef = custRef;
     }
 
+
     public String getId() {
         return id;
     }
     public void setId(String id) {
         this.id = id;
     }
+
 
     public String getInitiationMode() {
         return initiationMode;
@@ -63,12 +64,14 @@ public class Txn {
         this.initiationMode = initiationMode;
     }
 
+
     public String getNote() {
         return note;
     }
     public void setNote(String note) {
         this.note = note;
     }
+
 
     public String getPurpose() {
         return purpose;
@@ -77,12 +80,14 @@ public class Txn {
         this.purpose = purpose;
     }
 
+
     public String getRefId() {
         return refId;
     }
     public void setRefId(String refId) {
         this.refId = refId;
     }
+
 
     public String getRefUrl() {
         return refUrl;
@@ -91,12 +96,14 @@ public class Txn {
         this.refUrl = refUrl;
     }
 
+
     public String getSubType() {
         return subType;
     }
     public void setSubType(String subType) {
         this.subType = subType;
     }
+
 
     public String getTs() {
         return ts;
@@ -105,6 +112,7 @@ public class Txn {
         this.ts = ts;
     }
 
+
     public String getType() {
         return type;
     }
@@ -112,13 +120,9 @@ public class Txn {
         this.type = type;
     }
 
-    public String getDelegate() {
-        return delegate;
-    }
-    public void setDelegate(String delegate) {
-        this.delegate = delegate;
-    }
-
     // --- Elements ---
+
+
+
 
 }

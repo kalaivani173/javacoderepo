@@ -37,11 +37,6 @@ public final class ReqPayValidator {
             return "INVALID_FIELD_VALUE:Txn.initiationMode=" + txn.getInitiationMode();
         }
 
-        if (txn.getDelegate() != null &&
-                !ValidationRules.REQPAY_TXN_DELEGATE_ALLOWED_VALUES.contains(txn.getDelegate())) {
-            return "INVALID_FIELD_VALUE:Txn.delegate=" + txn.getDelegate();
-        }
-
         return null; // ✅ VALID
     }
 }

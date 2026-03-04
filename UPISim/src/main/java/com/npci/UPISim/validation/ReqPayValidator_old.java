@@ -41,7 +41,7 @@ public final class ReqPayValidator {
             return "MISSING_FIELD:Txn.delegate";
         }
 
-        if (!ValidationRules.REQPAY_REQPAY_TXN_DELEGATE_ALLOWED_VALUES.contains(txn.getDelegate())) {
+        if (!ValidationRules.REQPAY_TXN_DELEGATE_ALLOWED_VALUES.contains(txn.getDelegate())) {
             return "INVALID_FIELD_VALUE:Txn.delegate=" + txn.getDelegate();
         }
 

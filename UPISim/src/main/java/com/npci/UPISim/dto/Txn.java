@@ -30,6 +30,8 @@ public class Txn {
     private String type;
     @XmlAttribute
     private String delegate;
+    @XmlAttribute
+    private String subProduct;
 
     public Txn() {
     }
@@ -117,6 +119,13 @@ public class Txn {
     }
     public void setDelegate(String delegate) {
         this.delegate = delegate;
+    }
+
+    public String getSubProduct() {
+        return subProduct;
+    }
+    public void setSubProduct(String subProduct) {
+        this.subProduct = subProduct;
     }
 
     // --- Elements ---

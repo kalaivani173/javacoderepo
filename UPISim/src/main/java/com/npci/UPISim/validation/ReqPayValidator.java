@@ -45,5 +45,18 @@ public final class ReqPayValidator {
             return "INVALID_FIELD_VALUE:Txn.delegate=" + txn.getDelegate();
         }
 
+        if (reqPay.getPayer() == null) {
+            return "MISSING_FIELD:Payer";
+        }
+
+        if (reqPay.getPayer().getDevice() == null) {
+            return "MISSING_FIELD:Payer.Device";
+        }
+
+        if (reqPay.getPayer().getDevice().getBindingMode() != null &&
+                !ValidationRules.REQPAY_PAYER_DEVICE_BINDINGMODE_ALLOWED_VALUES.contains(reqPay.getPayer().getDevice().getBindingMode())) {
+            return "INVALID_FIELD_VALUE:Payer.Device.BINDINGMODE=" + reqPay.getPayer().getDevice().getBindingMode();
+        }
+
         return null; // ✅ VALID
     }

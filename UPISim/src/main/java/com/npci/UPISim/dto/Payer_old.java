@@ -28,9 +28,6 @@ public class Payer {
     @XmlElement(name = "Device")
     private Device device;
 
-    @XmlAttribute(name = "BINDINGMODE")
-    private String bindingMode;
-
     public Payer() {
     }
 
@@ -56,6 +53,8 @@ public class Payer {
     @XmlElement(name = "Ac")
     private Ac ac;
 
+
+
     @XmlElement(name = "Amount")
     private Amount amount;
 
@@ -78,12 +77,13 @@ public class Payer {
     public Info getInfo() { return info; }
     public void setInfo(Info info) { this.info = info; }
 
+
+
     public Ac getAc() { return ac; }
     public void setAc(Ac ac) { this.ac = ac; }
 
+
+
     public Amount getAmount() { return amount; }
     public void setAmount(Amount amount) { this.amount = amount; }
-
-    public String getBindingMode() { return bindingMode; }
-    public void setBindingMode(String bindingMode) { this.bindingMode = bindingMode; }
 }

@@ -27,4 +27,7 @@ public final class ValidationRules {
 
     public static final Set<String> REQPAY_DEVICE_BINDINGMODE_ALLOWED_VALUES =
             Set.of("SMS", "SMV");
+
+    public static final Set<String> REQPAY_PAYER_DEVICE_BINDINGMODE_ALLOWED_VALUES =
+            Set.of("SMS", "RSMS");
 }

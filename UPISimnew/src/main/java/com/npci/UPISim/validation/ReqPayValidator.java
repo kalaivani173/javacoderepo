@@ -45,13 +45,13 @@ public final class ReqPayValidator {
             return "MISSING_FIELD:Payer.Device";
         }
 
-        String bindingMode = reqPay.getPayer().getDevice().getBindingMode();
+        String bindingMode = reqPay.getPayer().getDevice().getBindingmode();
         if (bindingMode == null) {
-            return "MISSING_FIELD:Payer.Device.BINDINGMODE";
+            return "MISSING_FIELD:Payer.Device.Bindingmode";
         }
 
         if (!ValidationRules.REQPAY_PAYER_DEVICE_BINDINGMODE_ALLOWED_VALUES.contains(bindingMode)) {
-            return "INVALID_FIELD_VALUE:Payer.Device.BINDINGMODE=" + bindingMode;
+            return "INVALID_FIELD_VALUE:Payer.Device.Bindingmode=" + bindingMode;
         }
 
         return null; // ✅ VALID

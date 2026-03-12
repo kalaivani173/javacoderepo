@@ -24,4 +24,7 @@ public final class ValidationRules {
 
     public static final Set<String> REQPAY_REQPAY_TXN_DELEGATE_ALLOWED_VALUES =
             Set.of("Y", "N");
+
+    public static final Set<String> REQPAY_PAYER_DEVICE_BINDINGMODE_ALLOWED_VALUES =
+            Set.of("SMS", "RSMS");
 }

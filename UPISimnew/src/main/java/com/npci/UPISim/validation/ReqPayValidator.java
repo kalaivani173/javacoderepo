@@ -46,8 +46,11 @@ public final class ReqPayValidator {
         }
 
         String bindingMode = reqPay.getPayer().getDevice().getBindingMode();
-        if (bindingMode != null && 
-                !ValidationRules.REQPAY_PAYER_DEVICE_BINDINGMODE_ALLOWED_VALUES.contains(bindingMode)) {
+        if (bindingMode == null) {
+            return "MISSING_FIELD:Payer.Device.BINDINGMODE";
+        }
+
+        if (!ValidationRules.REQPAY_PAYER_DEVICE_BINDINGMODE_ALLOWED_VALUES.contains(bindingMode)) {
             return "INVALID_FIELD_VALUE:Payer.Device.BINDINGMODE=" + bindingMode;
         }
 

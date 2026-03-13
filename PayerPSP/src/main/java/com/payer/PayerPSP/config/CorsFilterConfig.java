@@ -14,7 +14,11 @@ public class CorsFilterConfig {
     @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration cfg = new CorsConfiguration();
-        cfg.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:3001"));
+        // Allow any localhost/127.0.0.1 dev-server port (3000/3001/3002/etc.)
+        cfg.setAllowedOriginPatterns(List.of(
+                "http://localhost:*",
+                "http://127.0.0.1:*"
+        ));
         cfg.setAllowedMethods(List.of("GET","POST","PUT","DELETE","OPTIONS"));
         cfg.addAllowedHeader("*");
         cfg.setAllowCredentials(true);

@@ -30,29 +30,29 @@ public interface TransactionLogRepository extends JpaRepository<TransactionLog, 
 
     List<TransactionLog> findByTxnIdOrderByCreatedAtAsc(String txnId);
 
-    @Query(value = "SELECT status FROM transaction_logs WHERE txnId = :txnId ORDER BY createdAt DESC LIMIT 1", nativeQuery = true)
+    @Query(value = "SELECT status FROM transaction_logs WHERE txn_id = :txnId ORDER BY created_at DESC LIMIT 1", nativeQuery = true)
     String findLatestStatus(@Param("txnId") String txnId);
 
-    // Native query that returns distinct txnId and latest FinalRespPay status (or 'PENDING' if none).
+    // Native query that returns distinct txn_id and latest FinalRespPay status (or 'PENDING' if none).
     @Query(
             value = """
           SELECT 
-              t.txnId AS txnId,
+              t.txn_id AS txnId,
               COALESCE((
                   SELECT r.status 
                   FROM transaction_logs r 
-                  WHERE r.txnId = t.txnId AND r.api = 'FinalRespPay'
-                  ORDER BY r.createdAt DESC LIMIT 1
+                  WHERE r.txn_id = t.txn_id AND r.api = 'FinalRespPay'
+                  ORDER BY r.created_at DESC LIMIT 1
               ), 'PENDING') AS respStatus,
               COALESCE((
-                  SELECT r.createdAt 
+                  SELECT r.created_at 
                   FROM transaction_logs r 
-                  WHERE r.txnId = t.txnId AND r.api = 'FinalRespPay'
-                  ORDER BY r.createdAt DESC LIMIT 1
-              ), MAX(t.createdAt)) AS createdAt
+                  WHERE r.txn_id = t.txn_id AND r.api = 'FinalRespPay'
+                  ORDER BY r.created_at DESC LIMIT 1
+              ), MAX(t.created_at)) AS createdAt
           FROM transaction_logs t
-          GROUP BY t.txnId
-          ORDER BY MAX(t.createdAt) DESC
+          GROUP BY t.txn_id
+          ORDER BY MAX(t.created_at) DESC
           """,
             nativeQuery = true)
     List<TxnRespStatusProjection> findAllTxnIdsWithLatestFinalRespPayStatus();

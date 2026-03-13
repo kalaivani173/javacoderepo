@@ -14,7 +14,7 @@ public class CorsFilterConfig {
     @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration cfg = new CorsConfiguration();
-        cfg.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:3001"));
+        cfg.setAllowedOrigins(List.of("http://localhost:3000"));
         cfg.setAllowedMethods(List.of("GET","POST","PUT","DELETE","OPTIONS"));
         cfg.addAllowedHeader("*");
         cfg.setAllowCredentials(true);

@@ -3,12 +3,12 @@ package com.npci.UPISim.controller;
 import com.npci.UPISim.dto.TxnRespPayStatusDto;
 import com.npci.UPISim.model.TransactionLog;
 import com.npci.UPISim.service.TransactionLogService;
+import com.npci.UPISim.util.XmlPrettyPrinter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/dashboard")
@@ -37,14 +37,15 @@ public class TransactionLogController {
 
     @GetMapping("/logs/{txnId}")
     public List<String> getLogs(@PathVariable String txnId) {
-        return service.getLogsForTxn(txnId);
+        return service.getLogsForTxn(txnId).stream()
+                .map(XmlPrettyPrinter::format)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/status/{txnId}")
-    public ResponseEntity<Map<String, String>> getTxnStatus(@PathVariable String txnId) {
+    public ResponseEntity<String> getTxnStatus(@PathVariable String txnId) {
         String status = service.getTxnStatus(txnId);
-        String value = status == null ? "PENDING" : status;
-        return ResponseEntity.ok(Collections.singletonMap("status", value));
+        return ResponseEntity.ok(status == null ? "PENDING" : status);
     }
 
 }

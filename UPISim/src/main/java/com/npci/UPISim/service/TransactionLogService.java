@@ -39,10 +39,7 @@ public class TransactionLogService {
 
     public List<String> getLogsForTxn(String txnId) {
         return repo.findByTxnIdOrderByCreatedAtAsc(txnId).stream()
-                .map(log -> {
-                    String p = log.getPayload();
-                    return (p == null || p.isEmpty()) ? "(no payload)" : XmlPrettyPrinter.format(p);
-                })
+                .map(log -> XmlPrettyPrinter.format(log.getPayload()))
                 .collect(Collectors.toList());
     }
 

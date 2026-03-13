@@ -1,4 +1,4 @@
-package com.npci.UPISim.repository;
+package com.npci.UPISim.repo;
 
 
 import com.npci.UPISim.model.PspBank;

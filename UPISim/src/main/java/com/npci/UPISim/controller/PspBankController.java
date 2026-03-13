@@ -1,7 +1,7 @@
 package com.npci.UPISim.controller;
 
 import com.npci.UPISim.model.PspBank;
-import com.npci.UPISim.repository.PspBankRepository;
+import com.npci.UPISim.repo.PspBankRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

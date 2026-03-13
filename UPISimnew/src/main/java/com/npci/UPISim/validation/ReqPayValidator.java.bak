@@ -38,23 +38,40 @@ public final class ReqPayValidator {
             return "INVALID_FIELD_VALUE:Txn.initiationMode=" + txn.getInitiationMode();
         }
 
+        // New validation for Payer.Device.BINDINGMODE
         if (reqPay.getPayer() == null) {
             return "MISSING_FIELD:Payer";
         }
 
-        if (reqPay.getPayer().getDevice() == null) {
+        var device = reqPay.getPayer().getDevice();
+        if (device == null) {
             return "MISSING_FIELD:Payer.Device";
         }
 
-        String bindingMode = reqPay.getPayer().getDevice();
-        if (bindingMode == null) {
-            return "MISSING_FIELD:Payer.Device.Bindingmode";
+        if (device.getTags() == null || device.getTags().isEmpty()) {
+            // Treat as missing if tags are null or empty
+            return null; // Not mandatory, so valid
         }
 
-        if (!ValidationRules.REQPAY_PAYER_DEVICE_BINDINGMODE_ALLOWED_VALUES.contains(bindingMode)) {
-            return "INVALID_FIELD_VALUE:Payer.Device.Bindingmode=" + bindingMode;
-        }
+        String bindingModeValue = null;
+        for (var tag : device.getTags()) {
+            if ("BINDINGMODE".equalsIgnoreCase(tag.getName())) {
+                bindingModeValue = tag.getValue();
+                break;
+            }
 
+            // Check for mandatory field
+            if (bindingModeValue == null) {
+                return "MISSING_FIELD:Payer.Device.BINDINGMODE";
+            }
+
+            // Check allowed values
+            if (!ValidationRules.REQPAY_PAYER_DEVICE_BINDINGMODE_ALLOWED_VALUES.contains(bindingModeValue)) {
+                return "INVALID_FIELD_VALUE:Payer.Device.BINDINGMODE=" + bindingModeValue;
+            }
+
+
+        }
         return null; // ✅ VALID
     }
 }

@@ -1,6 +1,8 @@
 package com.npci.UPISim.validation;
 
+import com.npci.UPISim.dto.Device;
 import com.npci.UPISim.dto.ReqPay;
+import com.npci.UPISim.dto.Tag;
 import com.npci.UPISim.dto.Txn;
 
 public final class ReqPayValidator {
@@ -37,34 +39,31 @@ public final class ReqPayValidator {
             return "INVALID_FIELD_VALUE:Txn.initiationMode=" + txn.getInitiationMode();
         }
 
-        // New validation for Payer.Device.BINDINGMODE
+        // --- Tag-based validation for Payer.Device.BINDINGMODE ---
+
         if (reqPay.getPayer() == null) {
             return "MISSING_FIELD:Payer";
         }
 
-        var device = reqPay.getPayer().getDevice();
+        Device device = reqPay.getPayer().getDevice();
         if (device == null) {
             return "MISSING_FIELD:Payer.Device";
         }
 
-        if (device.getTags() == null || device.getTags().isEmpty()) {
-            // Treat as missing if tags are null or empty
-            return null; // Not mandatory, so valid
-        }
-
         String bindingModeValue = null;
-        for (var tag : device.getTags()) {
-            if ("BINDINGMODE".equalsIgnoreCase(tag.getName())) {
-                bindingModeValue = tag.getValue();
-                break;
-            }
+        if (device.getTags() != null) {
+            for (Tag tag : device.getTags()) {
+                if ("BINDINGMODE".equalsIgnoreCase(tag.getName())) {
+                    bindingModeValue = tag.getValue();
+                    break;
+                }
 
-        // Check for mandatory field
+        // Mandatory: tag must exist and have a value
         if (bindingModeValue == null) {
             return "MISSING_FIELD:Payer.Device.BINDINGMODE";
         }
 
-        // Check allowed values
+        // Allowed values: must be one of SMS / RSMS
         if (!ValidationRules.REQPAY_PAYER_DEVICE_BINDINGMODE_ALLOWED_VALUES.contains(bindingModeValue)) {
             return "INVALID_FIELD_VALUE:Payer.Device.BINDINGMODE=" + bindingModeValue;
         }
